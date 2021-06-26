@@ -33,7 +33,6 @@ public interface WeatherStationService {
     Call<WeatherData> getCurrentWeather(@Path("station") String station,
                                         @Query("fields") List<String> fields);
 
-    @GET
     // ... getHistoryWeather(station, from, to);
 
 
