@@ -7,6 +7,8 @@ import sk.fri.uniza.model.WeatherData;
 
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +73,48 @@ public class App {
                 System.out.println(body);
             }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Call<List<WeatherData>> historyWeatherPojo =
+                iotNode.getWeatherStationService()
+                        .getHistoryWeather("station_1", "20/01/2021 14:00", "25/01/2021 15:00");
+        try {
+            // Odoslanie požiadavky na server pomocou REST rozhranie
+            Response<List<WeatherData>> response = historyWeatherPojo.execute();
+
+            if (response.isSuccessful()) { // Dotaz na server bol neúspešný
+                //Získanie údajov vo forme inštancie triedy WeatherData
+                List<WeatherData> body = response.body();
+                System.out.println(body);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Call<List<WeatherData>> historyWeatherPojo2 =
+                iotNode.getWeatherStationService()
+                        .getHistoryWeather("station_1", "20/01/2021 14:00", "25/01/2021 15:00", List.of("time", "date",
+                                "airTemperature"));
+        try {
+            // Odoslanie požiadavky na server pomocou REST rozhranie
+            Response<List<WeatherData>> response = historyWeatherPojo2.execute();
+
+            if (response.isSuccessful()) { // Dotaz na server bol neúspešný
+                //Získanie údajov vo forme inštancie triedy WeatherData
+                List<WeatherData> body = response.body();
+                System.out.println(body);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            double result = iotNode.getAverageTemperature("station_1", "20/01/2021 14:00", "25/01/2021 15:00");
+            System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
