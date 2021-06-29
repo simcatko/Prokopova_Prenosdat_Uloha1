@@ -6,7 +6,6 @@ import sk.fri.uniza.model.Location;
 import sk.fri.uniza.model.Token;
 import sk.fri.uniza.model.WeatherData;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -46,11 +45,34 @@ public interface WeatherStationService {
                                        @Query("fields") List<String> fields);
 
 
-    // ... getHistoryWeather(  station, from, to, fields);
+    @FormUrlEncoded
+    @POST("/apikey/createjwt")
+    Call<Token> getToken(@Header("Authorization") String authorization, @Field("claims") List<String> claims);
 
-    // ... getToken(authorization, claims);
+    @GET("/weather/locations")
+    Call<List<Location>> getStationLocationsAuth(@Header("Authorization") String token);
 
+    @GET("/weather/{station}/current")
+    Call<WeatherData> getCurrentWeatherAuth(@Header("Authorization") String token,
+                                            @Path("station") String station);
 
+    @GET("/weather/{station}/current")
+    Call<WeatherData> getCurrentWeatherAuth(@Header("Authorization") String token,
+                                        @Path("station") String station,
+                                        @Query("fields") List<String> fields);
+
+    @GET("/weather/{station}/history")
+    Call<List<WeatherData>> getHistoryWeatherAuth(@Header("Authorization") String token,
+                                                  @Path("station") String station,
+                                                  @Query("from") String from,
+                                                  @Query("to") String to);
+
+    @GET("/weather/{station}/history")
+    Call<List<WeatherData>> getHistoryWeatherAuth(@Header("Authorization") String token,
+                                                  @Path("station") String station,
+                                                  @Query("from") String from,
+                                                  @Query("to") String to,
+                                                  @Query("fields") List<String> fields);
     // ... getStationLocationsAuth(authorization);
 
 
