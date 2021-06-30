@@ -49,25 +49,25 @@ public interface WeatherStationService {
     @POST("/apikey/createjwt")
     Call<Token> getToken(@Header("Authorization") String authorization, @Field("claims") List<String> claims);
 
-    @GET("/weather/locations")
+    @GET("/weatherAuth/locations")
     Call<List<Location>> getStationLocationsAuth(@Header("Authorization") String token);
 
-    @GET("/weather/{station}/current")
+    @GET("/weatherAuth/{station}/current")
     Call<WeatherData> getCurrentWeatherAuth(@Header("Authorization") String token,
                                             @Path("station") String station);
 
-    @GET("/weather/{station}/current")
+    @GET("/weatherAuth/{station}/current")
     Call<WeatherData> getCurrentWeatherAuth(@Header("Authorization") String token,
                                         @Path("station") String station,
                                         @Query("fields") List<String> fields);
 
-    @GET("/weather/{station}/history")
+    @GET("/weatherAuth/{station}/history")
     Call<List<WeatherData>> getHistoryWeatherAuth(@Header("Authorization") String token,
                                                   @Path("station") String station,
                                                   @Query("from") String from,
                                                   @Query("to") String to);
 
-    @GET("/weather/{station}/history")
+    @GET("/weatherAuth/{station}/history")
     Call<List<WeatherData>> getHistoryWeatherAuth(@Header("Authorization") String token,
                                                   @Path("station") String station,
                                                   @Query("from") String from,

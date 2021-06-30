@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import sk.fri.uniza.model.Location;
 import sk.fri.uniza.model.Token;
+import sk.fri.uniza.model.Weather;
 import sk.fri.uniza.model.WeatherData;
 
 
@@ -206,5 +207,36 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+//        Boolean cnt = true;
+//        while (cnt) {
+//            try {
+//                Call<WeatherData> currentWeatherCnt =
+//                        iotNode.getWeatherStationService()
+//                                .getCurrentWeather("station_1",
+//                                        List.of("time", "date",
+//                                                "airTemperature", "humidity", "rainIntensity"));
+//
+//                Response<WeatherData> response = currentWeatherCnt.execute();
+//
+//                if (response.isSuccessful()) {
+//                    WeatherData body = response.body();
+//                    Weather weather = new Weather();
+//                    weather.setTime(body.getTime());
+//                    weather.setHumidity(body.getHumidity());
+//                    weather.setAirTemperature(body.getAirTemperature());
+//                    weather.setRainIntensity(body.getRainIntensity());
+//
+//                    iotNode.getHouseholdService().createWeather(weather).execute();
+//                }
+//
+//                Thread.sleep(60000);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                cnt = false;
+//            } catch (InterruptedException e) {
+//                cnt = false;
+//            }
+//        }
     }
 }
